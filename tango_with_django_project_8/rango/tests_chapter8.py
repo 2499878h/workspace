@@ -9,7 +9,7 @@
 # 
 
 #
-# In order to run these tests, copy this module to your tango_with_django_project_7/rango/ directory.
+# In order to run these tests, copy this module to your tango_with_django_project_8/rango/ directory.
 # Once this is complete, run $ python manage.py test rango.tests_chapter8
 # 
 # The tests will then be run, and the output displayed -- do you pass them all?
