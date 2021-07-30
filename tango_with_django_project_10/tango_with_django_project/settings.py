@@ -14,22 +14,22 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+TEMPLATE_DIR = os.path.join(BASE_DIR,"templates");
+STATIC_DIR = os.path.join(BASE_DIR,"static");
+MEDIA_DIR = os.path.join(BASE_DIR,"media");
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sq_z*m=yr)aiu$9lyzf@)&-!o(yjs=)9igwhuco$d7@a3jed=@'
+SECRET_KEY = '8d(#rwl^rg+!nd#@-_!t&#pjiud(5&tq_(r93&km%c@)qqtl8e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = 'rango:login'
 
 # Application definition
 
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rango',
+    'rango'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'tango_with_django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, ],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,5 +125,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
-MEDIA_ROOT = MEDIA_DIR
+MEDIA_ROOT= MEDIA_DIR
 MEDIA_URL = '/media/'
+
+LOGIN_URL = 'rango:login'
+
+#SESSION_EXPIRE_AT_BROWSER_CLOSE=True
