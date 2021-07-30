@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rango import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    #http://127.0.0.1:8000/
+    path('', views.home_page),
+
+    #http://127.0.0.1:8000/index_html
+    path('index_html', views.index_html),
+    #http://127.0.0.1:8000/about_html
+    path('about_html', views.about_html)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

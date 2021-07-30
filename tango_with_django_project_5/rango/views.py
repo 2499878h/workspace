@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 def home_page(request):
 
-    html = "Please check the website http://127.0.0.1:8000/index_html or http://127.0.0.1:8000/about_html"
+    html = "Please check the website http://127.0.0.1:8000/admin/"
     return HttpResponse(html)
 
 
