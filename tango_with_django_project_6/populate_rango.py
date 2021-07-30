@@ -1,71 +1,61 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','tango_with_django_project_6.settings')
 
 import django
 django.setup()
-from rango.models import Category, Page
-
-# For an explanation of what is going on here, please refer to the TwD book.
+from rango.models import Category,Page
 
 def populate():
+    # First create some dictionaries that list the pages you want to add to each category
+    # Then create a nested dictionary that sets up each category
+    # This may seem difficult to understand, but it is easy to iterate and add data to the model
+
     python_pages = [
-        {'title': 'Official Python Tutorial',
-         'url':'http://docs.python.org/3/tutorial/',
-         'views': 114,},
-        {'title':'How to Think like a Computer Scientist',
-         'url':'http://www.greenteapress.com/thinkpython/',
-         'views': 53},
-        {'title':'Learn Python in 10 Minutes',
-         'url':'http://www.korokithakis.net/tutorials/python/',
-         'views': 20} ]
-    
+        {"title": "Official Python Tutorial", "url": "http://docs.python.org/2/tutorial/", "views": 32},
+        {"title": "How to Think like a Computer Scientist", "url": "http://www.greenteapress.com/thinkpython/",
+         "views": 16},
+        {"title": "Learn Python in 10 Minutes", "url": "http://www.korokithakis.net/tutorials/python/", "views": 8}]
+
     django_pages = [
-        {'title':'Official Django Tutorial',
-         'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/',
-         'views': 32},
-        {'title':'Django Rocks',
-         'url':'http://www.djangorocks.com/',
-         'views': 12},
-        {'title':'How to Tango with Django',
-         'url':'http://www.tangowithdjango.com/',
-         'views': 1258} ]
-    
+        {"title": "Official Django Tutorial", "url": "https://docs.djangoproject.com/en/1.9/intro/tutorial01/",
+         "views": 32},
+        {"title": "Django Rocks", "url": "http://www.djangorocks.com/", "views": 16},
+        {"title": "How to Tango with Django", "url": "http://www.tangowithdjango.com/", "views": 8}]
+
     other_pages = [
-        {'title':'Bottle',
-         'url':'http://bottlepy.org/docs/dev/',
-         'views': 54},
-        {'title':'Flask',
-         'url':'http://flask.pocoo.org',
-         'views': 64} ]
-    
-    cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64},
-            'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
-            'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
-    
+        {"title": "Bottle", "url": "http://bottlepy.org/docs/dev/", "views": 32},
+        {"title": "Flask", "url": "http://flask.pocoo.org", "views": 16}]
+
+
+    cats = {"Python": {"pages": python_pages,'views':128,'likes':64},
+        "Django": {"pages": django_pages,'views':64,'likes':32},
+        "Other Frameworks": {"pages": other_pages,'views':32,'likes':16}}
+
+    # The following code iterates over the cats dictionary, adds each category, and adds the relevant pages to the category
     for cat, cat_data in cats.items():
-        c = add_cat(cat, views=cat_data['views'], likes=cat_data['likes'])
-        for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'], views=p['views'])
-    
+        c = add_cat(cat, cat_data['views'], cat_data['likes'])
+        for p in cat_data["pages"]:
+            add_page(c, p["title"], p["url"], p["views"])
+
+    # Print the added categories
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
-            print(f'- {c}: {p}')
+            print("-{0}-{1}".format(str(c),str(p)))
 
-def add_page(cat, title, url, views=0):
-    p = Page.objects.get_or_create(category=cat, title=title)[0]
-    p.url=url
-    p.views=views
+def add_page(cat,title,url,views=0):
+    p = Page.objects.get_or_create(category=cat,title=title)[0]
+    p.url = url
+    p.views = views
     p.save()
     return p
 
-def add_cat(name, views=0, likes=0):
+def add_cat(name,views,likes):
     c = Category.objects.get_or_create(name=name)[0]
     c.views = views
     c.likes = likes
     c.save()
     return c
 
-# Start execution here!
 if __name__ == '__main__':
-    print('Starting Rango population script...')
+    print("Starting Rango population script...")
     populate()
